@@ -2,7 +2,6 @@ image:
   repository: cdalvaro/docker-salt-master
   tag: "3004_6"
 
-
 # -- Configures service settings for the chart.
 # @default -- See values.yaml
 service:
@@ -11,6 +10,7 @@ service:
       metallb.universe.tf/allow-shared-ip: dg
     type: ClusterIP
     # You should attach load balancer IP manually after creating service
+    # kubectl patch svc <svc-name> -p '{"spec": {"type": "LoadBalancer", "externalIPs":["x.x.x.x"]}}
     # loadBalancerIP: 192.168.1.2
     ports:
       http:
