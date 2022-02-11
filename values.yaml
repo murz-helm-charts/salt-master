@@ -1,4 +1,51 @@
-global:
-  persitence:
-    storageClassName: ceph-filesystem
-  loadBalancerIp: 192.168.1.1
+image:
+  repository: cdalvaro/docker-salt-master
+  tag: "3004_6"
+
+
+# -- Configures service settings for the chart.
+# @default -- See values.yaml
+service:
+  main:
+    annotations:
+      metallb.universe.tf/allow-shared-ip: dg
+    type: ClusterIP
+    # You should attach load balancer IP manually after creating service
+    # loadBalancerIP: 192.168.1.2
+    ports:
+      http:
+        enabled: false
+      publisher:
+        enabled: true
+        port: 4505
+      request-server:
+        enabled: true
+        port: 4506
+
+persistence:
+  roots:
+    enabled: true
+    accessMode: ReadWriteMany
+    mountPath: /home/salt/data/srv
+    storageClass: ceph-filesystem
+    size: 512Mi
+  keys:
+    enabled: true
+    accessMode: ReadWriteMany
+    mountPath: /home/salt/data/keys
+    storageClass: ceph-filesystem
+    size: 16Mi
+  config:
+    enabled: true
+    accessMode: ReadWriteMany
+    mountPath: /home/salt/data/config
+    storageClass: ceph-filesystem
+    size: 8Mi
+
+probes:
+  liveness:
+    enabled: false
+  readiness:
+    enabled: false
+  startup:
+    enabled: false

@@ -1,0 +1,24 @@
+# This file contains common values that often needs overriding
+# You can use it as staring point to tune Chart for your needs
+
+# image:
+#   tag: "3004_6"
+
+# service:
+#   main:
+#     annotations:
+#       # Here you can enable sharing ip address using metallb
+#       metallb.universe.tf/allow-shared-ip: dg
+#     # This will not workk, you should attach load balancer IP manually after creating service
+#     loadBalancerIP: 10.130.0.30
+
+# persistence:
+#   roots:
+#     # storageClass: ceph-filesystem
+#     size: 512Mi
+#   keys:
+#     # storageClass: ceph-filesystem
+#     size: 16Mi
+#   config:
+#     # storageClass: ceph-filesystem
+#     size: 8Mi
